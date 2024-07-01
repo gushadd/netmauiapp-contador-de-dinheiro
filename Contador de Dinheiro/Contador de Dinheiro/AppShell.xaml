@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:Contador_de_Dinheiro.MVVM.Views"
     Shell.FlyoutBehavior="Disabled"
-    Title="Contador_de_Dinheiro">
+    Title="Contador_de_Dinheiro"
+    BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
     <TabBar>
         <ShellContent

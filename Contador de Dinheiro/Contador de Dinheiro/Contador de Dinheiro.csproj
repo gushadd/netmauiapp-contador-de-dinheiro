@@ -66,6 +66,10 @@
 	  <None Remove="Resources\Fonts\Inter-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Inter-SemiBold.ttf" />
 	  <None Remove="Resources\Fonts\Inter-Thin.ttf" />
+	  <None Remove="Resources\Images\trashdarkmode.svg" />
+	  <None Remove="Resources\Images\trashlightmode.svg" />
+	  <None Remove="Resources\Images\trash_dark_mode.svg" />
+	  <None Remove="Resources\Images\trash_light_mode.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

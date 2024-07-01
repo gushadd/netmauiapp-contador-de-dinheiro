@@ -5,25 +5,36 @@
              xmlns:viewmodel="clr-namespace:Contador_de_Dinheiro.MVVM.ViewModels"
              x:DataType="viewmodel:ContagemViewModel"
              x:Class="Contador_de_Dinheiro.MVVM.Views.ContagemView"
-             Title="Contagem">
+             Title="Contagem"
+             Shell.TitleColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
     <ContentPage.Resources>
         <DataTemplate x:Key="TemplateDinheiro" x:DataType="model:DinheiroModel">
 
-            <Frame BorderColor="Transparent" BackgroundColor="LightGrey" Margin="10, 5, 10, 5" Padding="10" HeightRequest="100">
+            <Frame BorderColor="Transparent" 
+                   BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" 
+                   Margin="10, 5, 10, 5" Padding="10" HeightRequest="100">
                 
-                <Grid ColumnDefinitions="2*, 3*, 1*" RowDefinitions="*, *" ColumnSpacing="10">
+                <Grid ColumnDefinitions="2*, 3*, 1*" RowDefinitions="6*, 4*" ColumnSpacing="10">
 
-                    <BoxView Grid.RowSpan="2"/>
-                    <Frame BackgroundColor="White" Grid.Column="1" Padding="0">
-                        <Entry Keyboard="Numeric" Text="{Binding Quantidade}" MaxLength="4"/>
+                    <Frame Grid.RowSpan="2" BorderColor="Transparent"/>
+
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}" 
+                           BorderColor="Transparent" Grid.Column="1" Padding="10, 5, 10, 5">
+                        
+                        <Entry Keyboard="Numeric" 
+                               Text="{Binding Quantidade}" 
+                               TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}" 
+                               MaxLength="4"/>
                     </Frame>
                     
-                    <Button BackgroundColor="Purple" Grid.Column="2" 
+                    <Button BackgroundColor="Transparent"  Grid.Column="2" 
                             Command="{Binding DeletarCommand, Source={RelativeSource AncestorType={x:Type viewmodel:ContagemViewModel}}}"
                             CommandParameter="{Binding .}"/>
 
                     <Label Text="{Binding ValorTotal, StringFormat='R$ {0:#,0.#0}'}"
+                           TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
                            HorizontalTextAlignment="Center"
                            VerticalTextAlignment="End"
                            FontFamily="InterMedium"
