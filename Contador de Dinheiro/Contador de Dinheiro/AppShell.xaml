@@ -3,13 +3,18 @@
     x:Class="Contador_de_Dinheiro.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Contador_de_Dinheiro"
+    xmlns:views="clr-namespace:Contador_de_Dinheiro.MVVM.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="Contador_de_Dinheiro">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Contagem"
+            ContentTemplate="{DataTemplate views:ContagemView}"/>
 
+        <ShellContent
+            Title="Salvos"
+            ContentTemplate="{DataTemplate views:ContagensSalvasView}"/> 
+    </TabBar>
+    
 </Shell>

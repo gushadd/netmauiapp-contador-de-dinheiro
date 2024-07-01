@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Contador_de_Dinheiro.MVVM.Models"
+             xmlns:viewmodel="clr-namespace:Contador_de_Dinheiro.MVVM.ViewModels"
+             x:DataType="viewmodel:ContagemViewModel"
+             x:Class="Contador_de_Dinheiro.MVVM.Views.ContagemView"
+             Title="Contagem">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="TemplateDinheiro" x:DataType="model:DinheiroModel">
+
+            <Frame BorderColor="Transparent" BackgroundColor="LightGrey" Margin="10, 5, 10, 5" Padding="10" HeightRequest="100">
+                
+                <Grid ColumnDefinitions="2*, 3*, 1*" RowDefinitions="*, *" ColumnSpacing="10">
+
+                    <BoxView Grid.RowSpan="2"/>
+                    <Frame BackgroundColor="White" Grid.Column="1" Padding="0">
+                        <Entry Keyboard="Numeric" Text="{Binding Quantidade}" MaxLength="4"/>
+                    </Frame>
+                    
+                    <Button BackgroundColor="Purple" Grid.Column="2" 
+                            Command="{Binding DeletarCommand, Source={RelativeSource AncestorType={x:Type viewmodel:ContagemViewModel}}}"
+                            CommandParameter="{Binding .}"/>
+
+                    <Label Text="{Binding ValorTotal, StringFormat='R$ {0:#,0.#0}'}"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="End"
+                           FontFamily="InterMedium"
+                           Grid.Row="1" 
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"/>
+
+                </Grid>   
+            </Frame>
+            
+        </DataTemplate>
+    </ContentPage.Resources>
+    
+    
+    
+    <ScrollView>
+        <StackLayout>
+            <CollectionView ItemsSource="{Binding Moedas}" ItemTemplate="{StaticResource TemplateDinheiro}"/>
+            <CollectionView ItemsSource="{Binding Notas}" ItemTemplate="{StaticResource TemplateDinheiro}"/>
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>
