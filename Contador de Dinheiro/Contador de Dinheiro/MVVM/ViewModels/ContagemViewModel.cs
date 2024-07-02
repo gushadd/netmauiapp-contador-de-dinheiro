@@ -24,22 +24,22 @@ public partial class ContagemViewModel : ObservableObject
     {
         Moedas =
         [
-            new DinheiroModel(0.05),
-            new DinheiroModel(0.1),
-            new DinheiroModel(0.25),
-            new DinheiroModel(0.5),
-            new DinheiroModel(1.0)
+            new DinheiroModel(0.05, "cinco_centavos_light.png", "cinco_centavos_dark.png"),
+            new DinheiroModel(0.10, "dez_centavos_light.png", "dez_centavos_dark.png"),
+            new DinheiroModel(0.25, "vinte_e_cinco_centavos_light.png", "vinte_e_cinco_centavos_dark.png"),
+            new DinheiroModel(0.50, "cinquenta_centavos_light.png", "cinquenta_centavos_dark.png"),
+            new DinheiroModel(1, "um_real_light.png", "um_real_dark.png")
         ];
 
         Notas =
         [
-            new DinheiroModel(2.0),
-            new DinheiroModel(5.0),
-            new DinheiroModel(10.0),
-            new DinheiroModel(20.0),
-            new DinheiroModel(50.0),
-            new DinheiroModel(100.0),
-            new DinheiroModel(200.0)
+            new DinheiroModel(2, "dois_reais_light.png", "dois_reais_dark.png"),
+            new DinheiroModel(5, "cinco_reais_light.png", "cinco_reais_dark.png"),
+            new DinheiroModel(10, "dez_reais_light.png", "dez_reais_dark.png"),
+            new DinheiroModel(20, "vinte_reais_light.png", "vinte_reais_dark.png"),
+            new DinheiroModel(50, "cinquenta_reais_light.png", "cinquenta_reais_dark.png"),
+            new DinheiroModel(100, "cem_reais_light.png", "cem_reais_dark.png"),
+            new DinheiroModel(200, "duzentos_reais_light.png", "duzentos_reais_dark.png")
         ];
 
         // Assina o evento PropertyChanged para todas as moedas e notas

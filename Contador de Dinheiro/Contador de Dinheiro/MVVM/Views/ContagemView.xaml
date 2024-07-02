@@ -2,26 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Contador_de_Dinheiro.MVVM.Models"
-             xmlns:viewmodel="clr-namespace:Contador_de_Dinheiro.MVVM.ViewModels"
+             xmlns:viewmodel="clr-namespace:Contador_de_Dinheiro.MVVM.ViewModels" 
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:ContagemViewModel"
              x:Class="Contador_de_Dinheiro.MVVM.Views.ContagemView"
              Title="Contagem"
-             Shell.TitleColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
+             Shell.TitleColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"
              BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
     <ContentPage.Resources>
+
         <DataTemplate x:Key="TemplateDinheiro" x:DataType="model:DinheiroModel">
 
-            <Frame BorderColor="Transparent" 
-                   BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" 
-                   Margin="10, 5, 10, 5" Padding="10" HeightRequest="100">
+            <Frame BorderColor="{AppThemeBinding Light={StaticResource Transparent}}" 
+                   BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource PrimaryDark}}" 
+                   Margin="10, 5, 10, 5" Padding="10" HeightRequest="90">
                 
                 <Grid ColumnDefinitions="2*, 3*, 1*" RowDefinitions="6*, 4*" ColumnSpacing="10">
 
-                    <Frame Grid.RowSpan="2" BorderColor="Transparent"/>
+                    <Frame Grid.RowSpan="2"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}" 
+                           BorderColor="{AppThemeBinding Light={StaticResource Secondary}}" 
+                           Padding="0">
+                        
+                        <Label Text="{Binding Valor}" FontFamily="InterBlack" FontSize="22" 
+                               TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}" 
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    </Frame>
 
                     <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}" 
-                           BorderColor="Transparent" Grid.Column="1" Padding="10, 5, 10, 5">
+                           BorderColor="{AppThemeBinding Light={StaticResource Secondary}}" Grid.Column="1" Padding="10, 0, 10, 0">
                         
                         <Entry Keyboard="Numeric" 
                                Text="{Binding Quantidade}" 
@@ -31,7 +41,9 @@
                     
                     <Button BackgroundColor="Transparent"  Grid.Column="2" 
                             Command="{Binding DeletarCommand, Source={RelativeSource AncestorType={x:Type viewmodel:ContagemViewModel}}}"
-                            CommandParameter="{Binding .}"/>
+                            CommandParameter="{Binding .}"
+                            ImageSource="{AppThemeBinding Light=trashlight.png, Dark=trashdark.png}"
+                            Scale="1.1"/>
 
                     <Label Text="{Binding ValorTotal, StringFormat='R$ {0:#,0.#0}'}"
                            TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
@@ -47,13 +59,19 @@
             
         </DataTemplate>
     </ContentPage.Resources>
-    
-    
-    
+
+
     <ScrollView>
-        <StackLayout>
-            <CollectionView ItemsSource="{Binding Moedas}" ItemTemplate="{StaticResource TemplateDinheiro}"/>
+        <StackLayout Spacing="10" Padding="0, 15, 0, 0">
+
+            <Label Text="NOTAS" FontFamily="InterBold" FontSize="20"
+                   HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+
             <CollectionView ItemsSource="{Binding Notas}" ItemTemplate="{StaticResource TemplateDinheiro}"/>
+
+            <Label Text="MOEDAS" FontFamily="InterBold" FontSize="20"
+                   HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+            <CollectionView ItemsSource="{Binding Moedas}" ItemTemplate="{StaticResource TemplateDinheiro}"/>
         </StackLayout>
     </ScrollView>
     
