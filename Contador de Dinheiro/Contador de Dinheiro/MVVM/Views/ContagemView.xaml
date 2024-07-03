@@ -10,6 +10,18 @@
              Shell.TitleColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"
              BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="*, *" Padding="0, 0, 18, 0">
+            <Label Text="Contagem" FontSize="19" VerticalTextAlignment="Center" FontFamily="InterSemiBold"
+                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"/>
+
+            <Label Grid.Column="1" FontSize="16" VerticalTextAlignment="Center" HorizontalTextAlignment="End"
+                   FontFamily="InterRegular"
+                   Text="{Binding SomaTotal, StringFormat='R$ {0:N2}'}"
+                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"/>
+        </Grid>    
+    </Shell.TitleView>
+    
     <ContentPage.Resources>
         <DataTemplate x:Key="TemplateDinheiro" x:DataType="model:DinheiroModel">
 
@@ -17,12 +29,6 @@
                    Background="{AppThemeBinding Light=White, Dark={StaticResource PrimaryDark}}">
 
                 <Grid ColumnDefinitions="3*, 5*, 2*" RowDefinitions="*, *" ColumnSpacing="15">
-
-                    <!--<BoxView Grid.RowSpan="2"/>
-                    <BoxView Grid.Row="0" Grid.Column="1" Background="Green"/>
-                    <BoxView Grid.Row="1" Grid.Column="1" Background="Red"/>
-                    <BoxView Grid.Row="0" Grid.Column="2" Background="Yellow"/>
-                    <BoxView Grid.Row="1" Grid.Column="2" Background="Blue"/>-->
 
                     <Border Grid.RowSpan="2" Background="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource SecondaryDark}}">
                         <Border.StrokeShape>
@@ -37,11 +43,11 @@
                     </Border>
 
                     <Entry Grid.Column="1" Text="{Binding Quantidade}" VerticalOptions="End" FontFamily="InterRegular"
-                           TextColor="{AppThemeBinding Light={StaticResource Text}}"
-                           Keyboard="Numeric"/>
-                    
+                           TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
+                           Keyboard="Numeric" MaxLength="4"/>
+
                     <Label Grid.Column="1" Grid.Row="1" 
-                           Text="{Binding ValorTotal, StringFormat='{}{0:N2}'}"
+                           Text="{Binding ValorTotal, StringFormat='R$ {0:N2}'}"
                            TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
                            FontFamily="InterMedium"
                            HorizontalTextAlignment="Center"
@@ -51,16 +57,22 @@
                             ImageSource="{AppThemeBinding Light=add_light.png, Dark=add_dark.png}"
                             Command="{Binding AdicionarCommand, Source={RelativeSource AncestorType={x:Type viewmodel:ContagemViewModel}}}"
                             CommandParameter="{Binding .}"/>
-                    
+
                     <Button Grid.Column="2" Grid.Row="1" Background="Transparent"
                             ImageSource="{AppThemeBinding Light=trashlight.png, Dark=trashdark.png}"
                             Command="{Binding DeletarCommand, Source={RelativeSource AncestorType={x:Type viewmodel:ContagemViewModel}}}"
                             CommandParameter="{Binding .}"/>
-                    
+
                 </Grid>
             </Frame>
-            
         </DataTemplate>
+
+        <Style x:Key="SomaDeValoresStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+        
     </ContentPage.Resources>
 
 
@@ -74,7 +86,49 @@
 
             <Label Text="Moedas" FontFamily="InterBold" FontSize="20"
                    HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+            
             <CollectionView ItemsSource="{Binding Moedas}" ItemTemplate="{StaticResource TemplateDinheiro}"/>
+
+            <Frame BorderColor="Transparent" Margin="25, 0, 25, 0" CornerRadius="24" HeightRequest="130"
+                   Background="{AppThemeBinding Light=White, Dark={StaticResource PrimaryDark}}" Padding="0">
+
+                <Grid ColumnDefinitions="*, *" RowDefinitions="*, *">
+
+                    <Label Style="{StaticResource SomaDeValoresStyle}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Valor em moedas:&#x0a;" FontFamily="InterRegular" FontSize="14"/>
+                                <Span Text="{Binding SomaDasMoedas,StringFormat='{}{0:N2}'}" FontFamily="InterBold" FontSize="17"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Style="{StaticResource SomaDeValoresStyle}"
+                           Grid.Column="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Valor em notas:&#x0a;" FontFamily="InterRegular" FontSize="14"/>
+                                <Span Text="{Binding SomaDasNotas,StringFormat='{}{0:N2}'}" FontFamily="InterBold" FontSize="17"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Style="{StaticResource SomaDeValoresStyle}"
+                           Grid.Row="1" Grid.ColumnSpan="2">     
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Valor total:&#x0a;" FontFamily="InterRegular" FontSize="14"/>
+                                <Span Text="{Binding SomaTotal,StringFormat='{}{0:N2}'}" FontFamily="InterBold" FontSize="17"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+
+                </Grid>
+                                
+            </Frame>
+            
+            
         </StackLayout>
     </ScrollView>
     

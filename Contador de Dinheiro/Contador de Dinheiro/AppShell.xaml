@@ -11,11 +11,13 @@
     <TabBar>
         <ShellContent
             Title="Contagem"
-            ContentTemplate="{DataTemplate views:ContagemView}"/>
+            ContentTemplate="{DataTemplate views:ContagemView}"
+            Icon="{AppThemeBinding Light=icone_contagem_light.png, Dark=icone_contagem_dark.png}"/>
 
         <ShellContent
             Title="Salvos"
-            ContentTemplate="{DataTemplate views:ContagensSalvasView}"/> 
+            ContentTemplate="{DataTemplate views:ContagensSalvasView}"
+            Icon="{AppThemeBinding Light=icone_salvos_light.png, Dark=icone_salvos_dark.png}"/> 
     </TabBar>
     
 </Shell>
