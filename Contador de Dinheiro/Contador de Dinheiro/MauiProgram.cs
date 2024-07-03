@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Hosting;
+using System.Globalization;
 
 namespace Contador_de_Dinheiro
 {
@@ -28,8 +29,12 @@ namespace Contador_de_Dinheiro
                     fonts.AddFont("Inter-Thin.ttf", "InterThin");                    
                 });
 
+            // Configurar a cultura para pt-BR
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

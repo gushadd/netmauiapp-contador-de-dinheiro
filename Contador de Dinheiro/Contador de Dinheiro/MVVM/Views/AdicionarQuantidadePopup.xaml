@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:views="clr-namespace:Contador_de_Dinheiro.MVVM.Views"
+             x:Class="Contador_de_Dinheiro.MVVM.Views.AdicionarQuantidadePopup">
+
+    <mct:Popup.Resources>
+        <Style TargetType="{x:Type views:AdicionarQuantidadePopup}">
+            <Setter Property="Size" Value="300, 170"/>
+            <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Background}}"/>
+        </Style>
+    </mct:Popup.Resources>
+    
+    <VerticalStackLayout Padding="25" Spacing="10">
+        <Entry x:Name="QuantidadeEntry" Placeholder="Digite a quantidade a adicionar" Keyboard="Numeric" MaxLength="3"/>
+        <Grid ColumnDefinitions="*, *" ColumnSpacing="20">
+            <Button CornerRadius="15" Text="Cancelar" Clicked="Cancelar_Clicked"/>
+            <Button Grid.Column="1" CornerRadius="15" Text="Adicionar" Clicked="Adicionar_Clicked"/>
+        </Grid>
+    </VerticalStackLayout>
+        
+</mct:Popup>

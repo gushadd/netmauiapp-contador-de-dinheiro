@@ -81,6 +81,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="MVVM\Views\AdicionarQuantidadePopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\ContagemView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
