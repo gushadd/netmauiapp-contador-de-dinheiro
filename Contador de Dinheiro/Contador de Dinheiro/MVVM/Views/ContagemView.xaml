@@ -26,11 +26,11 @@
         <DataTemplate x:Key="TemplateDinheiro" x:DataType="model:DinheiroModel">
 
             <Frame BorderColor="Transparent" Margin="25, 10, 25, 10" CornerRadius="24" HeightRequest="80" Padding="0"
-                   Background="{AppThemeBinding Light=White, Dark={StaticResource PrimaryDark}}">
+                   Background="{AppThemeBinding Light=White, Dark={StaticResource SecondaryDark}}">
 
                 <Grid ColumnDefinitions="3*, 5*, 2*" RowDefinitions="*, *" ColumnSpacing="15">
 
-                    <Border Grid.RowSpan="2" Background="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource SecondaryDark}}">
+                    <Border Grid.RowSpan="2" Background="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="23, 23, 23, 23"/>
                         </Border.StrokeShape>
@@ -90,7 +90,7 @@
             <CollectionView ItemsSource="{Binding Moedas}" ItemTemplate="{StaticResource TemplateDinheiro}"/>
 
             <Frame BorderColor="Transparent" Margin="25, 0, 25, 0" CornerRadius="24" HeightRequest="130"
-                   Background="{AppThemeBinding Light=White, Dark={StaticResource PrimaryDark}}" Padding="0">
+                   Background="{AppThemeBinding Light=White, Dark={StaticResource SecondaryDark}}" Padding="0">
 
                 <Grid ColumnDefinitions="*, *" RowDefinitions="*, *">
 
@@ -123,12 +123,27 @@
                         </Label.FormattedText>
                     </Label>
 
-
                 </Grid>
                                 
             </Frame>
-            
-            
+
+            <Frame BorderColor="Transparent" Margin="25, 10, 25, 10" CornerRadius="24" HeightRequest="130"
+                   Background="{AppThemeBinding Light=White, Dark={StaticResource SecondaryDark}}" Padding="0">
+
+                <StackLayout Spacing="10" Padding="20, 10, 20, 10">
+
+                    <Entry Placeholder="Digite um nome (opcional)"
+                           Text="{Binding Nome}"
+                           TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+
+                    <Button CornerRadius="15" Text="Salvar" FontFamily="InterSemiBold" FontSize="17"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                            TextColor="{AppThemeBinding Light=White, Dark={StaticResource TextDark}}"
+                            Command="{Binding SalvarCommand}"/>
+                    
+                </StackLayout>
+            </Frame>
+
         </StackLayout>
     </ScrollView>
     

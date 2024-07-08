@@ -7,7 +7,7 @@
 
     <mct:Popup.Resources>
         <Style TargetType="{x:Type views:AdicionarQuantidadePopup}">
-            <Setter Property="Size" Value="300, 170"/>
+            <Setter Property="Size" Value="300, 160"/>
             <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}"/>
         </Style>
     </mct:Popup.Resources>

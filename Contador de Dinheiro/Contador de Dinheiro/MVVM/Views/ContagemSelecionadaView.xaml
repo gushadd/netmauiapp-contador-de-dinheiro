@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Contador_de_Dinheiro.MVVM.ViewModels"
+             xmlns:model="clr-namespace:Contador_de_Dinheiro.MVVM.Models"
+             x:DataType="viewmodel:ContagemSelecionadaViewModel"
+             x:Class="Contador_de_Dinheiro.MVVM.Views.ContagemSelecionadaView"
+             Title="{Binding Contagem.Nome}"
+             Shell.TitleColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
+
+    
+
+    <ScrollView>
+        <!-- TODO: layout da contagem selecionada -->
+    </ScrollView>
+
+</ContentPage>

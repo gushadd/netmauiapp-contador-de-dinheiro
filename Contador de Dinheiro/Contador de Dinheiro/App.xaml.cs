@@ -12,34 +12,11 @@ namespace Contador_de_Dinheiro
         {
             InitializeComponent();
 
-//            Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("MyCustomization", (handler, view) =>
-//            {
-//#if ANDROID
-//                handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
 
-
-//#endif
-//            });
-
-
-//            Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("MyCustomization", (handler, view) =>
-//            {
-//#if ANDROID
-//                handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
-
-
-//#endif
-//            });
-
-
-//            Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping("MyCustomization", (handler, view) =>
-//            {
-//#if ANDROID
-//                handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
-
-
-//#endif
-//            });
+            //if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "contagens.db3")))
+            //{
+            //    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "contagens.db3"));
+            //}
 
 
             MainPage = new AppShell();
