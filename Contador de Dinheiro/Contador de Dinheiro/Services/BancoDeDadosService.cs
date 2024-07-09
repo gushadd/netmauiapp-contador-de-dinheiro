@@ -21,7 +21,6 @@ public class BancoDeDadosService
     public static async Task SalvaContagem(ContagemModel contagem)
     {
         await Init();
-        //bancoDeDados.InsertWithChildren(contagem);
 
         await bancoDeDados.InsertAsync(contagem);
 
@@ -35,6 +34,22 @@ public class BancoDeDadosService
         {
             moeda.ContagemId = contagem.Id;
             await bancoDeDados.InsertAsync(moeda);
+        }
+    }
+
+    public static async Task AtualizaContagem(ContagemModel contagem)
+    {
+        await Init();
+        await bancoDeDados.UpdateAsync(contagem);
+
+        foreach(var nota in contagem.Notas)
+        {
+            await bancoDeDados.UpdateAsync(nota);
+        }
+
+        foreach (var moeda in contagem.Moedas)
+        {
+            await bancoDeDados.UpdateAsync(moeda);
         }
     }
 

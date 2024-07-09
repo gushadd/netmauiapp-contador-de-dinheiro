@@ -7,7 +7,7 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Contador_de_Dinheiro"
     BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource BackgroundDark}}">
-
+    
     <TabBar>
         <ShellContent
             Title="Contagem"
@@ -17,7 +17,7 @@
         <ShellContent
             Title="Salvos"
             ContentTemplate="{DataTemplate views:ContagensSalvasView}"
-            Icon="{AppThemeBinding Light=icone_salvos_light.png, Dark=icone_salvos_dark.png}"/> 
+            Icon="{AppThemeBinding Light=icone_salvos_light.png, Dark=icone_salvos_dark.png}"/>
     </TabBar>
-    
+
 </Shell>

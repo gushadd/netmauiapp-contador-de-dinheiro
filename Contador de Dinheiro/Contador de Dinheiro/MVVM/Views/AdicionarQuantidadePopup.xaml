@@ -17,11 +17,11 @@
         <Grid ColumnDefinitions="*, *" ColumnSpacing="20">
             <Button CornerRadius="15" Text="Cancelar" Clicked="Cancelar_Clicked"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
-                    TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"
                     FontFamily="InterSemiBold"/>
             <Button Grid.Column="1" CornerRadius="15" Text="Adicionar" Clicked="Adicionar_Clicked"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
-                    TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"
                     FontFamily="InterSemiBold"/>
         </Grid>
     </VerticalStackLayout>

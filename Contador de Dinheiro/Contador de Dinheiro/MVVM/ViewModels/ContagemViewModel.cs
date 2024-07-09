@@ -24,11 +24,15 @@ public partial class ContagemViewModel : ObservableObject
     public double somaDasMoedas;
 
     public double SomaTotal => SomaDasMoedas + SomaDasNotas;
-
     public string Nome {  get; set; }
 
+    private int _contagemId; 
+
+    // Construtor caso não haja parâmetro
     public ContagemViewModel()
     {
+        _contagemId = 0;
+
         Moedas =
         [
             new DinheiroModel(0.05),
@@ -49,16 +53,23 @@ public partial class ContagemViewModel : ObservableObject
             new DinheiroModel(200)
         ];
 
-        // Assina o evento PropertyChanged para todas as moedas e notas
-        foreach (var moeda in Moedas)
+        AssinaEventoPropertyChangedParaNotasEMoedas();
+    }
+
+    // Construtor caso haja parâmetro
+    public ContagemViewModel(ContagemModel? contagem)
+    {
+        if (contagem != null)
         {
-            moeda.PropertyChanged += OnDinheiroModelPropertyChanged;
+            Moedas = contagem.Moedas;
+            Notas = contagem.Notas;
+            SomaDasNotas = contagem.SomaDasNotas;
+            SomaDasMoedas = contagem.SomaDasMoedas;
+            Nome = contagem.Nome;
+            _contagemId = contagem.Id;
         }
 
-        foreach (var nota in Notas)
-        {
-            nota.PropertyChanged += OnDinheiroModelPropertyChanged;
-        }
+        AssinaEventoPropertyChangedParaNotasEMoedas();
     }
 
     // Chamado sempre que uma propriedade de DinheiroModel muda
@@ -68,6 +79,19 @@ public partial class ContagemViewModel : ObservableObject
         if (e.PropertyName == nameof(DinheiroModel.ValorTotal))
         {
             CalculaSoma();
+        }
+    }
+
+    private void AssinaEventoPropertyChangedParaNotasEMoedas()
+    {
+        foreach (var moeda in Moedas)
+        {
+            moeda.PropertyChanged += OnDinheiroModelPropertyChanged;
+        }
+
+        foreach (var nota in Notas)
+        {
+            nota.PropertyChanged += OnDinheiroModelPropertyChanged;
         }
     }
 
@@ -100,18 +124,33 @@ public partial class ContagemViewModel : ObservableObject
     {
         string nome = Nome;
 
-        if (Nome == null || Nome == "")
+        if (string.IsNullOrWhiteSpace(nome))
         {
             nome = "Contagem sem nome";
         }
 
-        ContagemModel contagem = new(Notas, Moedas, SomaDasNotas, SomaDasMoedas, SomaTotal, nome);
+        ContagemModel contagem = new(Notas, Moedas, SomaDasNotas, SomaDasMoedas, SomaTotal, nome)
+        {
+            Id = _contagemId // Preserva o Id da contagem, se existente
+        };
 
         try
         {
-            await BancoDeDadosService.SalvaContagem(contagem);
-            var toast = Toast.Make("Contagem salva com sucesso!", ToastDuration.Short, 14);
-            await toast.Show();
+            // Salva contagem nova
+            if (_contagemId == 0)
+            {
+                await BancoDeDadosService.SalvaContagem(contagem);
+                var toast = Toast.Make("Contagem salva com sucesso!", ToastDuration.Short, 14);
+                await toast.Show();
+            }
+            // Atualiza contagem existente
+            else
+            {
+                await BancoDeDadosService.AtualizaContagem(contagem);
+                var toast = Toast.Make("Contagem atualizada com sucesso!", ToastDuration.Short, 14);
+                await toast.Show();
+            }
+
         }
         catch (Exception ex)
         {

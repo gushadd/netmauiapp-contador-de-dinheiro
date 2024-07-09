@@ -15,7 +15,8 @@
                TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"/>
 
             <Button Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="End" WidthRequest="60"
-                    ImageSource="{AppThemeBinding Light=editar_light.png, Dark=editar_dark.png} "/>
+                    ImageSource="{AppThemeBinding Light=editar_light.png, Dark=editar_dark.png}"
+                    Command="{Binding EditarCommand}"/>
         </Grid>
     </Shell.TitleView>
 
