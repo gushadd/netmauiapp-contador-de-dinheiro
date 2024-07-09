@@ -9,10 +9,114 @@
              Shell.TitleColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"
              BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
-    
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="*, *">
+            <Label Text="{Binding Contagem.Nome}" FontSize="19" VerticalTextAlignment="Center" FontFamily="InterSemiBold"
+               TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"/>
+
+            <Button Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="End" WidthRequest="60"
+                    ImageSource="{AppThemeBinding Light=editar_light.png, Dark=editar_dark.png} "/>
+        </Grid>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+
+        <DataTemplate x:Key="ContagemSelecionadaTemplate" x:DataType="model:DinheiroModel">
+            <Frame BorderColor="Transparent" Margin="25, 10, 25, 10" CornerRadius="24" HeightRequest="80" Padding="0, 0, 10, 0"
+                   Background="{AppThemeBinding Light=White, Dark={StaticResource SecondaryDark}}">
+
+                <Grid ColumnDefinitions="3*, 8*" RowDefinitions="*, *">
+
+                    <Border Grid.RowSpan="2" Background="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="23, 23, 23, 23"/>
+                        </Border.StrokeShape>
+
+                        <Label Text="{Binding Valor, StringFormat='{}{0:N2}'}" FontFamily="InterBold" 
+                               TextColor="{AppThemeBinding Light=White, Dark={StaticResource TextDark}}"
+                               FontSize="20"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                    </Border>
+
+                    <Label Grid.Column="1" 
+                           Text="{Binding Quantidade, StringFormat='Quantidade: {0}'}"
+                           TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
+                           FontFamily="InterMedium"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"/>
+
+                    <Label Grid.Column="1" Grid.Row="1" 
+                           Text="{Binding ValorTotal, StringFormat='Valor: R$ {0:N2}'}"
+                           TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"
+                           FontFamily="InterMedium"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"/>
+
+                </Grid>
+            </Frame>
+        </DataTemplate>
+
+        <Style x:Key="SomaDeValoresStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+
+    </ContentPage.Resources>
 
     <ScrollView>
-        <!-- TODO: layout da contagem selecionada -->
+        <VerticalStackLayout Spacing="10" Padding="0, 10, 0, 0">
+            
+            <Label Text="Notas" FontFamily="InterBold" FontSize="20"
+                   HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+            
+            <CollectionView ItemsSource="{Binding Contagem.Notas}" ItemTemplate="{StaticResource ContagemSelecionadaTemplate}"/>
+
+            <Label Text="Moedas" FontFamily="InterBold" FontSize="20"
+                   HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+
+            <CollectionView ItemsSource="{Binding Contagem.Moedas}" ItemTemplate="{StaticResource ContagemSelecionadaTemplate}"/>
+
+            <Frame BorderColor="Transparent" Margin="25, 0, 25, 0" CornerRadius="24" HeightRequest="130"
+                   Background="{AppThemeBinding Light=White, Dark={StaticResource SecondaryDark}}" Padding="0">
+
+                <Grid ColumnDefinitions="*, *" RowDefinitions="*, *">
+
+                    <Label Style="{StaticResource SomaDeValoresStyle}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Valor em moedas:&#x0a;" FontFamily="InterRegular" FontSize="14"/>
+                                <Span Text="{Binding Contagem.SomaDasMoedas,StringFormat='{}{0:N2}'}" FontFamily="InterBold" FontSize="17"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Style="{StaticResource SomaDeValoresStyle}"
+                           Grid.Column="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Valor em notas:&#x0a;" FontFamily="InterRegular" FontSize="14"/>
+                                <Span Text="{Binding Contagem.SomaDasNotas,StringFormat='{}{0:N2}'}" FontFamily="InterBold" FontSize="17"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Style="{StaticResource SomaDeValoresStyle}"
+                           Grid.Row="1" Grid.ColumnSpan="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Valor total:&#x0a;" FontFamily="InterRegular" FontSize="14"/>
+                                <Span Text="{Binding Contagem.SomaTotal,StringFormat='{}{0:N2}'}" FontFamily="InterBold" FontSize="17"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </Grid>
+
+            </Frame>
+
+        </VerticalStackLayout>
     </ScrollView>
 
 </ContentPage>

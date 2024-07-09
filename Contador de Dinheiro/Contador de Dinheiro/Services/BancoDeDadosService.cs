@@ -1,8 +1,5 @@
-﻿
-using Contador_de_Dinheiro.MVVM.Models;
+﻿using Contador_de_Dinheiro.MVVM.Models;
 using SQLite;
-using SQLiteNetExtensions.Extensions;
-using System.Diagnostics;
 
 namespace Contador_de_Dinheiro.Services;
 
@@ -56,6 +53,7 @@ public class BancoDeDadosService
 
         if (contagem != null)
         {
+            // Gambiarra para separar notas e moedas :)
             contagem.Notas = await bancoDeDados.Table<DinheiroModel>().Where(d => d.ContagemId == id && d.Valor > 1).ToListAsync();
             contagem.Moedas = await bancoDeDados.Table<DinheiroModel>().Where(d => d.ContagemId == id && d.Valor <= 1).ToListAsync();
         }

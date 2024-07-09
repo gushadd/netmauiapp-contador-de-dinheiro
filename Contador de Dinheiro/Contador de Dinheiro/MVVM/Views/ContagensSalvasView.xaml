@@ -9,6 +9,13 @@
              Shell.TitleColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"
              BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
+    <Shell.TitleView>
+        <HorizontalStackLayout>
+            <Label Text="Salvos" FontSize="19" VerticalTextAlignment="Center" FontFamily="InterSemiBold"
+                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+
     <ContentPage.Resources>
         <DataTemplate x:Key="ContagensTemplate" x:DataType="model:ContagemModel">
             <Frame BorderColor="Transparent" CornerRadius="24" HeightRequest="100" Padding="20, 15, 20, 15"
