@@ -10,29 +10,66 @@
              BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
     <Shell.TitleView>
-        <HorizontalStackLayout>
+        <Grid ColumnDefinitions="*, *">
             <Label Text="Salvos" FontSize="19" VerticalTextAlignment="Center" FontFamily="InterSemiBold"
                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"/>
-        </HorizontalStackLayout>
+
+            <Button Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="End" WidthRequest="60"
+                    ImageSource="{AppThemeBinding Light=add_light.png, Dark=add_dark.png}"
+                    Command="{Binding NovaContagemCommand}"/>
+        </Grid>
     </Shell.TitleView>
 
     <ContentPage.Resources>
         <DataTemplate x:Key="ContagensTemplate" x:DataType="model:ContagemModel">
-            <Frame BorderColor="Transparent" CornerRadius="24" HeightRequest="100" Padding="20, 15, 20, 15"
-                   Margin="25, 10, 25, 10" InputTransparent="True"
-                   Background="{AppThemeBinding Light=White, Dark={StaticResource SecondaryDark}}">
+            <SwipeView>
+                <SwipeView.RightItems>
+                    <SwipeItems SwipeBehaviorOnInvoked="Close">
+                        <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ContagensSalvasViewModel}}, Path=DeletaContagemCommand}" CommandParameter="{Binding .}">
+                            <Frame BorderColor="Transparent" BackgroundColor="LightPink"
+                                   WidthRequest="90" Padding="7, 20, 7, 15">
+                                <Grid RowDefinitions="*, *">
+                                    <Image Source="trashlight.png" Scale=".8"/>
+                                    <Label Grid.Row="1" Text="Apagar" FontFamily="InterSemiBold" FontSize="13"
+                                           TextColor="{StaticResource Text}"
+                                           VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Grid>
+                            </Frame>
+                        </SwipeItemView>
+                    </SwipeItems>
+                </SwipeView.RightItems>
+                
+                <Frame BorderColor="Transparent" CornerRadius="24" HeightRequest="100" Padding="20, 15, 20, 15"
+                       Margin="25, 10, 25, 10"
+                       Background="{AppThemeBinding Light=White, Dark={StaticResource SecondaryDark}}">
 
-                <VerticalStackLayout>
-                    <Label Text="{Binding Nome}" FontFamily="InterSemiBold" FontSize="17"/>
-                    <Label Text="{Binding SomaTotal, StringFormat='R$ {0}'}" FontFamily="InterRegular" FontSize="14"/>
-                    <Label Text="{Binding Data}" FontFamily="InterRegular" FontSize="14"/>
-                </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ContagensSalvasViewModel}}, Path=VizualizaContagemCommand}"
+                                              CommandParameter="{Binding .}"/>
+                    </Frame.GestureRecognizers>
 
-            </Frame>
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Nome}" FontFamily="InterSemiBold" FontSize="17"/>
+                        <Label Text="{Binding SomaTotal, StringFormat='R$ {0}'}" FontFamily="InterRegular" FontSize="14"/>
+                        <Label Text="{Binding Data}" FontFamily="InterRegular" FontSize="14"/>
+                    </VerticalStackLayout>
+
+                </Frame>
+            </SwipeView>
+            
         </DataTemplate>
     </ContentPage.Resources>
 
     <CollectionView ItemsSource="{Binding ContagensSalvas}" ItemTemplate="{StaticResource ContagensTemplate}"
-                    SelectionMode="Single" SelectionChanged="Contagens_SelectionChanged"/>
+                    SelectionMode="None">
+        
+        <CollectionView.EmptyView>
+            <StackLayout>
+                <Label Text="Não há contagens salvas!" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+                       FontFamily="InterSemiBold" FontSize="16" 
+                       TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+            </StackLayout>
+        </CollectionView.EmptyView>
+    </CollectionView>
 
 </ContentPage>

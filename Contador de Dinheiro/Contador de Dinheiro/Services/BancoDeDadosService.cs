@@ -1,5 +1,6 @@
 ﻿using Contador_de_Dinheiro.MVVM.Models;
 using SQLite;
+using System.Diagnostics;
 
 namespace Contador_de_Dinheiro.Services;
 
@@ -74,5 +75,24 @@ public class BancoDeDadosService
         }
 
         return contagem;
+    }
+
+    public static async Task DeletaContagem(ContagemModel contagem)
+    {
+        await Init();
+
+        ContagemModel contagemParaDeletar = await GetContagemPorId(contagem.Id);
+
+        foreach (var moeda in contagemParaDeletar.Moedas)
+        {
+           await bancoDeDados.DeleteAsync(moeda);
+        }
+
+        foreach (var nota in contagemParaDeletar.Notas)
+        {
+            await bancoDeDados.DeleteAsync(nota);
+        }
+
+        await bancoDeDados.DeleteAsync(contagemParaDeletar);
     }
 }

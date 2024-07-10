@@ -156,6 +156,8 @@ public partial class ContagemViewModel : ObservableObject
         {
             var toast = Toast.Make($"Ocorreu um erro ao salvar {ex.Message}", ToastDuration.Short, 14);
             await toast.Show();
-        }      
+        }
+
+        await Shell.Current.Navigation.PopAsync();
     }
 }

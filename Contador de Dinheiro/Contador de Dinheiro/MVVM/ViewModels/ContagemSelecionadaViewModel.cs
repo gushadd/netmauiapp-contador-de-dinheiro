@@ -16,7 +16,7 @@ public partial class ContagemSelecionadaViewModel : ObservableObject
         InicializaAsync(contagem);
     }
 
-    private async void InicializaAsync(ContagemModel contagem)
+    public async void InicializaAsync(ContagemModel contagem)
     {
         Contagem = await BancoDeDadosService.GetContagemPorId(contagem.Id);
     }
