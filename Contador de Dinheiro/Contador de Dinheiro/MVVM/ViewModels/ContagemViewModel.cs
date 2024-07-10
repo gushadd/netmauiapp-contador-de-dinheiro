@@ -115,6 +115,13 @@ public partial class ContagemViewModel : ObservableObject
 
         if (resultado != null && int.TryParse(resultado.ToString(), out int quantidade)) 
         {
+            if (d.Quantidade + quantidade > 9999)
+            {
+                var toast = Toast.Make("Quantidade não pode ser maior que 9999", ToastDuration.Short, 14);
+                await toast.Show();
+                return;
+            }
+
             d.Quantidade += quantidade;
         }
     }
