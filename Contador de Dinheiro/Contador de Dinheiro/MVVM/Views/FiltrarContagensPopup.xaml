@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+            xmlns:views="clr-namespace:Contador_de_Dinheiro.MVVM.Views"
+             x:Class="Contador_de_Dinheiro.MVVM.Views.FiltrarContagensPopup">
+
+    <mct:Popup.Resources>
+        <Style TargetType="{x:Type views:FiltrarContagensPopup}">
+            <Setter Property="Size" Value="300, 360"/>
+            <Setter Property="Color" Value="{AppThemeBinding Light=White, Dark={StaticResource SecondaryDark}}"/>
+        </Style>
+
+        <Style x:Key="NomesDosFiltrosStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+            <Setter Property="FontFamily" Value="InterRegular"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="BotoesStyle" TargetType="Button">
+            <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"/>
+            <Setter Property="FontFamily" Value="InterSemiBold"/>
+            <Setter Property="WidthRequest" Value="80"/>
+            <Setter Property="CornerRadius" Value="15"/>
+        </Style>
+    </mct:Popup.Resources>
+
+    <StackLayout Padding="10, 20, 10, 20">
+        <Label Text="Ordenar" HorizontalTextAlignment="Center"
+               FontFamily="InterSemiBold" FontSize="18"
+               TextColor="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}"/>
+        
+        <Grid RowDefinitions="*,*, *, *" ColumnDefinitions="2*, 8*" Padding="20" RowSpacing="10">
+
+            <RadioButton GroupName="OrdenarGroup" Value="ValorDesc" CheckedChanged="Ordenar_CheckedChanged"/>
+            <Label Grid.Column="1" Text="Valor: maior para o menor" Style="{StaticResource NomesDosFiltrosStyle}"/>
+
+            <RadioButton Grid.Row="1" GroupName="OrdenarGroup" Value="ValorAsc" CheckedChanged="Ordenar_CheckedChanged"/>
+            <Label Grid.Column="1" Grid.Row="1" Text="Valor: menor para o maior" Style="{StaticResource NomesDosFiltrosStyle}"/>
+
+            <RadioButton Grid.Row="2" GroupName="OrdenarGroup" Value="DataDesc" CheckedChanged="Ordenar_CheckedChanged"/>
+            <Label Grid.Column="1" Grid.Row="2" Text="Data: novo para antigo" Style="{StaticResource NomesDosFiltrosStyle}"/>
+
+            <RadioButton Grid.Row="3" GroupName="OrdenarGroup" Value="DataAsc" CheckedChanged="Ordenar_CheckedChanged"/>
+            <Label Grid.Column="1" Grid.Row="3" Text="Data: antigo para novo" Style="{StaticResource NomesDosFiltrosStyle}"/>
+        
+        </Grid>
+
+        <Button Text="Cancelar" WidthRequest="130"
+                Style="{StaticResource BotoesStyle}"
+                Clicked="Cancelar_Clicked"/>
+
+    </StackLayout>
+
+</mct:Popup>

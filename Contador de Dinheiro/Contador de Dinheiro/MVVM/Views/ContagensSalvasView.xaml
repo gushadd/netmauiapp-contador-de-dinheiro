@@ -10,12 +10,16 @@
              BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
     <Shell.TitleView>
-        <Grid ColumnDefinitions="*, *">
+        <Grid ColumnDefinitions="7*, 1.5*, 1.5*">
             <Label Text="Salvos" FontSize="19" VerticalTextAlignment="Center" FontFamily="InterSemiBold"
                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextDark}}"/>
 
             <Button Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="End" WidthRequest="60"
-                    ImageSource="{AppThemeBinding Light=add_light.png, Dark=add_dark.png}"
+                    ImageSource="{AppThemeBinding Light=filtrar_light.png, Dark=filtrar_dark.png}"
+                    Command="{Binding FiltraContagensCommand}"/>
+
+            <Button Grid.Column="2" BackgroundColor="Transparent" HorizontalOptions="End" WidthRequest="60"
+                    ImageSource="{AppThemeBinding Light=add_contagem_light.png, Dark=add_contagem_dark.png}"
                     Command="{Binding NovaContagemCommand}"/>
         </Grid>
     </Shell.TitleView>

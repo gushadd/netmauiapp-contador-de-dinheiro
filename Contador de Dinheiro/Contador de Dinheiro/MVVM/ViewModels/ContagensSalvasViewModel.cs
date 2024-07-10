@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.Input;
 using Contador_de_Dinheiro.MVVM.Models;
 using Contador_de_Dinheiro.MVVM.Views;
@@ -25,6 +25,41 @@ public partial class ContagensSalvasViewModel
 
         foreach (var contagem in contagens) 
         {
+            ContagensSalvas.Add(contagem);
+        }
+    }
+
+    [RelayCommand]
+    async Task FiltraContagens()
+    {
+        var popup = new FiltrarContagensPopup();
+        var criterioDeOrdenacao = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+        List<ContagemModel> temp = new List<ContagemModel>(ContagensSalvas);
+
+        if (criterioDeOrdenacao != null)
+        {
+            switch(criterioDeOrdenacao.ToString())
+            {
+                case "ValorDesc":
+                    temp = temp.OrderByDescending(contagem => contagem.SomaTotal).ToList();
+                    break;
+                case "ValorAsc":
+                    temp = temp.OrderBy(contagem => contagem.SomaTotal).ToList();
+                    break;
+                case "DataDesc":
+                    temp = temp.OrderByDescending(contagem => contagem.Data).ToList();
+                    break;
+                case "DataAsc":
+                    temp = temp.OrderBy(contagem => contagem.Data).ToList();
+                    break;
+            }
+        }
+
+        ContagensSalvas.Clear();
+
+        foreach (var contagem in temp)
+        {
+            Debug.WriteLine("odoido");
             ContagensSalvas.Add(contagem);
         }
     }
