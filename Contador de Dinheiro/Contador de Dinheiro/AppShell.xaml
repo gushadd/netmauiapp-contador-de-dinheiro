@@ -8,6 +8,7 @@
     Title="Contador_de_Dinheiro"
     BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource BackgroundDark}}">
     
+    
     <ShellContent
         Title="Salvos"
         ContentTemplate="{DataTemplate views:ContagensSalvasView}"/>
